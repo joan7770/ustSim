@@ -1,0 +1,13 @@
+	lw	7	0	zero	# store product
+	lw	1	0	mcand	# load the multiplicand
+	lw	2	0	mplier	# load the multiplier
+	lw	6	0	zero	# i=0
+loop	beq	
+	add	7	7	1
+	nand	1	1
+	nand	2	2
+	beq		
+after	halt
+mcand	.fill	29562
+mplier 	.fill	11834
+zero	.fill	0
