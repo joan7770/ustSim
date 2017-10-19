@@ -5,8 +5,9 @@ mask	lw	6	0	one
 	lw	5	0	zero	# i=0
 loop	beq	5	2	after	# loop through mplier
 	nand	4	2	6	# find if there is a 1 in the mplier using the mask
-	beq	4	0	8
-mult	add	3	1	4	# add the mcand and the bit of mplier
+	beq	4	0	after
+	add	2	2	2
+mult	add	3	1	2	# add the mcand and the bit of mplier
 	sw	7	3	mult	# store prod into reg[7]
 endlp	add	6	6	6	# shift left
 	add	5	5	one	# i++	
