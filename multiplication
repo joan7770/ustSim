@@ -1,3 +1,4 @@
+	lw	0	0	zero
 	lw	1	0	mcand
 	lw	2	0	mplier
 	lw	7	0	zero	# prod reg
