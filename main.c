@@ -65,6 +65,7 @@ bool runLine(stateType *state, uint32_t line, bool run){
 	opcode = temp >> 22;
 	temp = line;
 	state->pc++;
+	
 	if(opcode == 0 || opcode == 1){ // and nand
 		temp = temp << 10;
 		regA = temp >> 29;
@@ -76,8 +77,6 @@ bool runLine(stateType *state, uint32_t line, bool run){
 		temp = line;
 		temp = temp << 29;
 		destR = temp >> 29;
-		
-		printf("ADD: R1 = %d R2 = %d R3 = %d\n", regA, regB, destR);
 		
 		if (opcode == 0) { // add
 			state->reg[destR] = state->reg[regA] + state->reg[regB];
@@ -102,17 +101,14 @@ bool runLine(stateType *state, uint32_t line, bool run){
 		
 		
 		if (opcode == 2) { // lw
-			printf("LW: R1 = %d R2 = %d R3 = %d\n", regA, regB, destR);
 			state->reg[regA] = state->mem[state->reg[regB] + destR];
 		}
 		
 		else if (opcode == 3){ // sw
-			printf("SW: R1 = %d R2 = %d R3 = %d\n", regA, regB, destR);
 			state->mem[state->reg[regB] + destR] = state->reg[regA];
 		}
 		
 		else{ //beq
-			printf("BEQ: R1 = %d R2 = %d R3 = %d\n", regA, regB, destR);
 			if (state->reg[regA] == state->reg[regB]) {
 				state->pc = state->pc+ destR;
 				
@@ -128,13 +124,11 @@ bool runLine(stateType *state, uint32_t line, bool run){
 		temp = temp << 13;
 		regB = temp >> 29;
 		
-		printf("JALR: R1 = %d R2 = %d\n", regA, regB);
-		state->reg[regA] = state->pc + 1;
+		state->reg[regA] = state->pc;
 		state->pc = state->reg[regB];
 	}
 	
 	else if(opcode == 6){ // halt
-		state->pc++;
 		return false;
 	}
 	
