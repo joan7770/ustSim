@@ -1,19 +1,21 @@
 	lw	1	0	mcand
 	lw	2	0	mplier
-prod	lw	7	0	zero
-mask	lw	6	0	one
+	lw	7	0	zero	# prod reg
+	lw	6	0	mask
 	lw	5	0	zero	# i=0
-loop	beq	5	2	after	# loop through mplier
-	nand	4	2	6	# find if there is a 1 in the mplier using the mask
-	beq	4	0	after
-	add	2	2	2
-mult	add	3	1	2	# add the mcand and the bit of mplier
-	sw	7	3	mult	# store prod into reg[7]
-endlp	add	6	6	6	# shift left
-	add	5	5	one	# i++	
+	lw	4	0	reps	# 15 repetitions allowed
+loop	beq	5	4	after	# i<15
+	nand	3	2	6	# test mplier for 1 or 0
+	beq	3	0	else	# if least sig bit of mplier is 1, add mcand to prod
+mult	add	7	1	1	# add mcand to prod
+	sw	7	1	mult	# store prod
+else	add	1	1	1	# shift mcand left
+	add	6	6	6	# shift mask left
+	add	5	5	one	# i++
 	beq	0	0	loop
 after	halt
 mcand	.fill	29562
 mplier	.fill	11834
 zero	.fill	0
-one	.fill	1
+mask	.fill	1
+reps	.fill	15
