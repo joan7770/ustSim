@@ -82,7 +82,7 @@ bool runLine(stateType *state, uint32_t line, bool run){
 			state->reg[destR] = state->reg[regA] + state->reg[regB];
 		}
 		else{ // nand
-			state->reg[destR] = ~(state->reg[regA] & state->reg[regB]);
+			state->reg[destR] = ~((uint32_t)state->reg[regA] & (uint32_t)state->reg[regB]);
 		}
 	}
 	
