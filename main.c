@@ -82,7 +82,7 @@ bool runLine(stateType *state, uint32_t line, bool run){
 			state->reg[destR] = state->reg[regA] + state->reg[regB];
 		}
 		else{ // nand
-			state->reg[destR] = ~((uint32_t)state->reg[regA] & (uint32_t)state->reg[regB]);
+			state->reg[destR] = ~(state->reg[regA] & state->reg[regB]);
 		}
 	}
 	
@@ -139,7 +139,7 @@ bool runLine(stateType *state, uint32_t line, bool run){
 	else{ // .fill ?
 		
 	}
-	
+	printf("Op: %d r1: %d r2: %d, r3: %d\n", opcode, regA, regB, destR);
 	return true;
 }
 
@@ -179,7 +179,7 @@ int main(int argc, const char * argv[]) {
 		printState(&state);
 		run = runLine(&state, state.mem[state.pc], run);
 		stat++;
-		printState(&state);
+		//printState(&state);
 	}
 	print_stats(stat);
 }
