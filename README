@@ -1,8 +1,8 @@
 Compilation: 
 	make
 Run: 
-	./simulator testx
-	./simulator multiplication
+	./simulator testx.mc
+	./simulator multiplication.mc
 	x indicates the machine code test file under the test_suite directory.
 	
 simulator.c
