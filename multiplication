@@ -1,14 +1,12 @@
 	lw	1	0	mcand
 	lw	2	0	mplier
-	lw	7	0	zero	# prod reg delete line later
 	lw	6	0	mask
-	lw	5	0	zero	# i=0 delete line later
+	lw	5	0	zero	# i=0
 	lw	4	0	reps	# 15 repetitions allowed
 loop	beq	5	4	after	# i<15
 	nand	3	2	6	# test mplier for 1 or 0
 	beq	3	0	else	# if least sig bit of mplier is 1, add mcand to prod
-mult	add	7	1	1	# add mcand to prod
-	sw	7	1	mult	# store prod, I do not think that this is the correct usage becasue of the add
+	add	7	7	1	# add mcand to prod
 else	add	1	1	1	# shift mcand left
 	add	6	6	6	# shift mask left
 	add	5	5	one	# i++
@@ -16,12 +14,6 @@ else	add	1	1	1	# shift mcand left
 after	halt
 mcand	.fill	29562
 mplier	.fill	11834
+zero	.fill	0
 mask	.fill	1
 reps	.fill	15
-zero	.fill	0
-# you don't need to set anything to 0 the simulator does that for us
-# Mcand is r1
-# mplier is r2
-# i is r5
-# mask is r6
-# prod is r7
