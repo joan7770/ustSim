@@ -147,6 +147,7 @@ int main(int argc, const char * argv[]) {
 	FILE *machineCode;
 	uint32_t line = 0;
 	bool run = true;
+	int stat = 0;
 	stateType state = {.pc = 0, .numMemory = 0};
 	
 	for (int i = 0; i < NUMMEMORY; i++) { // set regs to 0
@@ -177,7 +178,8 @@ int main(int argc, const char * argv[]) {
 	while (run) { // simulator
 		printState(&state);
 		run = runLine(&state, state.mem[state.pc], run);
+		stat++;
 		printState(&state);
-		
 	}
+	print_stats(stat);
 }
