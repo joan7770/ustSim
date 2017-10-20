@@ -1,9 +1,8 @@
 //
-//  main.c
-//  simulator
-//
-//  Created by Joan Marin on 10/16/17.
-//  Copyright © 2017 Joan Marin-Romero. All rights reserved.
+//  simulator.c
+//  Joan Marin-Romero
+//	Nacy Yang
+//	CISC 340
 //
 
 #include <stdio.h>
@@ -133,13 +132,12 @@ bool runLine(stateType *state, uint32_t line, bool run){
 	}
 	
 	else if(opcode == 7){ // noop
-		//noop
+		//noop do nothing
 	}
 	
 	else{ // .fill ?
-		
+		// can be ignored
 	}
-	printf("Op: %d r1: %d r2: %d, r3: %d\n", opcode, regA, regB, destR);
 	return true;
 }
 
@@ -179,7 +177,7 @@ int main(int argc, const char * argv[]) {
 		printState(&state);
 		run = runLine(&state, state.mem[state.pc], run);
 		stat++;
-		//printState(&state);
+		printState(&state);
 	}
 	print_stats(stat);
 }
